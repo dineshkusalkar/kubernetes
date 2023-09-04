@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: feedback-app-deploy
+  labels:
+    name: feedback-app-deploy
+    app: demo-feeedback-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: fedback-app-pod
+      app: demo-feeedback-app
+    
+  template:
+    metadata:
+      name: voting-app-pod
+      labels:
+        name: fedback-app-pod
+        app: demo-feeedback-app
+    spec:
+      containers:
+        - name: feedback-app
+          image: dineshmk/node-app:firsttt
+          volumeMounts:
+            - mountPath: /app/feedback
+              name: feedback-volume
+          ports:
+            - containerPort: 80
+      volumes:
+        - name: feedback-volume
+          hostPath:
+            path: /data
+            type: DirectoryOrCreate
+
+    

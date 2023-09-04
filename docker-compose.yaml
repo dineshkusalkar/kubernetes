@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  data-volumes-03-adj-node-code:
+    build: ./
+    ports:
+      - "3000:80"
+    volumes:
+      - feedback:/app/feedback 
+      - ./:/app
+      - /app/node_modules
+    container_name: compose1
+volumes:
+  feedback:
